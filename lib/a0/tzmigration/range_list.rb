@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module A0
-  module TZMigrate
+  module TZMigration
     def self.compact_range_list!(range_list) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       index = 0
 

@@ -6,7 +6,7 @@ require 'json'
 require 'etc'
 
 module A0
-  module TZMigrate
+  module TZMigration
     class DataGenerator
       def generate
         load_release_dates

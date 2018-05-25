@@ -3,7 +3,7 @@
 require 'git'
 
 module A0
-  module TZMigrate
+  module TZMigration
     class DataGenerator
       def repo
         return @repo if defined? @repo

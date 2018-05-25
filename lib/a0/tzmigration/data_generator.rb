@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'a0/tzmigrate/data_generator/git'
-require 'a0/tzmigrate/data_generator/process'
+require 'a0/tzmigration/data_generator/git'
+require 'a0/tzmigration/data_generator/process'
 
 module A0
-  module TZMigrate
+  module TZMigration
     class DataGenerator
       attr_reader :path, :out, :url, :versions
 

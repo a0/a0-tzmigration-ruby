@@ -2,17 +2,17 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'a0/tzmigrate/version'
+require 'a0/tzmigration/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'a0-tzmigrate'
-  spec.version       = A0::TZMigrate::VERSION
+  spec.name          = 'a0-tzmigration'
+  spec.version       = A0::TZMigration::VERSION
   spec.authors       = ['Aldrin Martoq']
   spec.email         = ['a@a0.cl']
 
   spec.summary       = 'Time zone migration.'
   spec.description   = 'When a new TZInfo database is released, it is usually a mess. This gem comes here to save the day.'
-  spec.homepage      = 'http://github.com/a0/a0-tzmigrate'
+  spec.homepage      = 'http://github.com/a0/a0-tzmigration-ruby'
   spec.license       = 'MIT'
 
   # Specify which files should be added to the gem when it is released.

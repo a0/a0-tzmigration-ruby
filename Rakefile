@@ -9,7 +9,7 @@ task default: :spec
 
 desc 'Generates data json files from tzinfo-data gem tagged versions from github'
 task 'generate-data' do
-  require 'a0/tzmigrate/data_generator'
+  require 'a0/tzmigration/data_generator'
 
-  A0::TZMigrate::DataGenerator.new('data').generate
+  A0::TZMigration::DataGenerator.new('data').generate
 end

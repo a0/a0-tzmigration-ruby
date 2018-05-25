@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module A0
-  module TZMigrate
+  module TZMigration
     class TimezoneVersion
       attr_reader :path, :name, :version
 
@@ -78,7 +78,7 @@ module A0
       end
 
       def timezone_ranges_timed
-        A0::TZMigrate.timestamp_range_list!(Marshal.dump(timezone_ranges))
+        A0::TZMigration.timestamp_range_list!(Marshal.dump(timezone_ranges))
       end
 
       def delta_range_list(other) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -87,8 +87,8 @@ module A0
 
         timestamp_list = (timestamps + other.timestamps).uniq.sort
 
-        list_a = A0::TZMigrate.split_range_list!(Marshal.load(Marshal.dump(timezone_ranges)), timestamp_list)
-        list_b = A0::TZMigrate.split_range_list!(Marshal.load(Marshal.dump(other.timezone_ranges)), timestamp_list)
+        list_a = A0::TZMigration.split_range_list!(Marshal.load(Marshal.dump(timezone_ranges)), timestamp_list)
+        list_b = A0::TZMigration.split_range_list!(Marshal.load(Marshal.dump(other.timezone_ranges)), timestamp_list)
 
         delta = []
         list_a.each_with_index do |range_a, index|
@@ -97,7 +97,7 @@ module A0
           delta << { ini: range_a[:ini], fin: range_a[:fin], off: range_b[:off] - range_a[:off] } if range_a[:off] != range_b[:off]
         end
 
-        A0::TZMigrate.timestamp_range_list!(A0::TZMigrate.compact_range_list!(delta))
+        A0::TZMigration.timestamp_range_list!(A0::TZMigration.compact_range_list!(delta))
       end
     end
   end
