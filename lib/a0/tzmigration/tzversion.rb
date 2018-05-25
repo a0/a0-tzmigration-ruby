@@ -2,7 +2,7 @@
 
 module A0
   module TZMigration
-    class TimezoneVersion
+    class TZVersion
       attr_reader :path, :name, :version
 
       def initialize(name, version)
@@ -39,7 +39,7 @@ module A0
         return @transitions if defined? @transitions
 
         if version_data['alias']
-          @transitions = TimezoneVersion.new(version_data['alias'], @version).transitions
+          @transitions = TZVersion.new(version_data['alias'], @version).transitions
         else
           @transitions = version_data['transitions']
           @transitions.each do |transition|
