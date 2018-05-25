@@ -2,6 +2,7 @@
 
 require 'a0/tzmigration/data_generator/git'
 require 'a0/tzmigration/data_generator/process'
+require 'a0/tzmigration/data_generator/save'
 
 module A0
   module TZMigration

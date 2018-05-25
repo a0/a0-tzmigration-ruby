@@ -2,7 +2,6 @@
 
 require 'time'
 require 'parallel'
-require 'json'
 require 'etc'
 
 module A0
@@ -15,7 +14,9 @@ module A0
         generate_timezones
 
         save_versions
+        save_versions_index
         save_timezones
+        save_timezones_index
       end
 
       def generate_versions
@@ -35,29 +36,6 @@ module A0
           version_data[:timezones].each do |name, timezone_data|
             @timezones[name] ||= { name: name, versions: {} }
             @timezones[name][:versions][version_data[:version]] = { tag: version_data[:tag], released_at: version_data[:released_at] }.merge timezone_data
-          end
-        end
-      end
-
-      def save_versions
-        FileUtils.mkdir_p File.join(@out, 'versions')
-
-        @versions.each do |version_data|
-          File.open(File.join(@out, 'versions', "#{version_data[:version]}.json"), 'w') do |file|
-            file.write(JSON.pretty_generate(version_data))
-          end
-        end
-      end
-
-      def save_timezones
-        FileUtils.mkdir_p File.join(@out, 'timezones')
-
-        @timezones.each do |name, timezone_data|
-          dir = name.split('/')[0...-1]
-          FileUtils.mkdir_p File.join(@out, 'timezones', dir) unless dir.empty?
-
-          File.open(File.join(@out, 'timezones', "#{name}.json"), 'w') do |file|
-            file.write(JSON.pretty_generate(timezone_data))
           end
         end
       end
