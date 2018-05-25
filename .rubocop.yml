@@ -5,3 +5,9 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - bin/*
+    - Gemfile
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'

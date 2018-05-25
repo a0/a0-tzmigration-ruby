@@ -11,7 +11,7 @@ module A0
       def initialize(out, url: 'https://github.com/tzinfo/tzinfo-data.git')
         @out = out
         @url = url
-        @path = File.join(@out, '.repo', 'tzinfo-data')
+        @path = File.join(@out, 'repo', 'tzinfo-data')
 
         FileUtils.mkdir_p @out
 
@@ -35,11 +35,5 @@ module A0
         Object.send(:remove_const, :TZInfo) if defined? TZInfo
       end
     end
-  end
-end
-
-def reload!(base = 'a0-tzmigrate')
-  $LOADED_FEATURES.select { |feature| feature =~ %r{\/#{base}\/lib\/} }.each do |feature|
-    puts "Reloading #{feature.gsub(/.*#{base}/, base)}: #{load feature}"
   end
 end

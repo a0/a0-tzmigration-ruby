@@ -34,7 +34,7 @@ module A0
         @versions.each do |version_data|
           version_data[:timezones].each do |name, timezone_data|
             @timezones[name] ||= { name: name, versions: {} }
-            @timezones[name][:versions][version_data[:version]] = { released_at: version_data[:released_at] }.merge timezone_data
+            @timezones[name][:versions][version_data[:version]] = { tag: version_data[:tag], released_at: version_data[:released_at] }.merge timezone_data
           end
         end
       end
@@ -82,13 +82,13 @@ module A0
         tzinfo_unload
         tzinfo_load
 
-        process
+        process tag
       end
 
-      def process
+      def process(tag)
         version = TZInfo::Data::Version::TZDATA
         timezones = {}
-        meta = { version: version, released_at: @released_at[version], timezones: timezones }
+        meta = { tag: tag, version: version, released_at: @released_at[version], timezones: timezones }
 
         TZInfo::Timezone.all.each do |timezone|
           process_timezone timezones, timezone.send(:real_timezone)

@@ -27,7 +27,7 @@ module A0
       end
 
       def repo_use(tag)
-        tag_path = File.join(@out, '.repo', tag)
+        tag_path = File.join(@out, 'repo', tag)
         lib_path = File.join(tag_path, 'lib')
         $LOAD_PATH.unshift File.expand_path(lib_path)
 
