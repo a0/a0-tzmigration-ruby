@@ -10,7 +10,7 @@ module A0
 
         @versions.each do |version_data|
           File.open(File.join(@out, 'versions', "#{version_data[:version]}.json"), 'w') do |file|
-            file.write(JSON.pretty_generate(version_data))
+            file.write(JSON.generate(version_data))
           end
         end
       end
@@ -23,7 +23,7 @@ module A0
           FileUtils.mkdir_p File.join(@out, 'timezones', dir) unless dir.empty?
 
           File.open(File.join(@out, 'timezones', "#{name}.json"), 'w') do |file|
-            file.write(JSON.pretty_generate(timezone_data))
+            file.write(JSON.generate(timezone_data))
           end
         end
       end
@@ -36,7 +36,7 @@ module A0
             [version_data[:version], { released_at: version_data[:released_at], timezones: version_data[:timezones].keys }]
           end.to_h
 
-          file.write(JSON.pretty_generate(versions: versions))
+          file.write(JSON.generate(versions: versions))
         end
       end
 
@@ -49,7 +49,7 @@ module A0
             [name, { versions: versions }]
           end.to_h
 
-          file.write(JSON.pretty_generate(timezones: object))
+          file.write(JSON.generate(timezones: object))
         end
       end
     end
