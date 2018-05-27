@@ -39,6 +39,8 @@ module A0
             @timezones[name][:versions][version_data[:version]] = { tag: version_data[:tag], released_at: version_data[:released_at] }.merge timezone_data
           end
         end
+
+        @timezones = @timezones.to_a.sort_by(&:first).to_h
       end
 
       def load_release_dates
