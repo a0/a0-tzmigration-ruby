@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Aldrin Martoq']
   spec.email         = ['a@a0.cl']
 
-  spec.summary       = 'Time zone migration.'
-  spec.description   = 'When a new TZInfo database is released, it is usually a mess. This gem comes here to save the day.'
+  spec.summary       = 'Time zone migration utilities, for ruby'
+  spec.description   = 'A gem that helps migration between timezone changes when they happen in the tzdata/zoneinfo/Olson database.'
   spec.homepage      = 'http://github.com/a0/a0-tzmigration-ruby'
   spec.license       = 'MIT'
 

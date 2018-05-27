@@ -17,6 +17,7 @@ module A0
         save_versions_index
         save_timezones
         save_timezones_index
+        save_index
       end
 
       def generate_versions

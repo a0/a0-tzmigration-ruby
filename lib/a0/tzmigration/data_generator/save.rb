@@ -52,6 +52,38 @@ module A0
           file.write(JSON.generate(timezones: object))
         end
       end
+
+      def save_index
+        File.open(File.join(@out, 'index.md'), 'w') do |file|
+          file.write version_head
+          @timezones.keys.sort.map do |timezone_name|
+            file.write timezones_row(timezone_name)
+          end
+        end
+      end
+
+      def version_head
+        head_a = @versions.map do |version_data|
+          version = version_data[:version]
+          "[#{version}](versions/#{version}.json)"
+        end.join ' | '
+        head_b = @versions.map { '---' }.join ' | '
+
+        "| | #{head_a} |\n| --- | #{head_b} |\n"
+      end
+
+      def timezones_row(timezone_name)
+        row = @versions.map do |version_data|
+          data = @timezones[timezone_name][:versions][version_data[:version]]
+          if data && data[:alias]
+            "→ #{data[:alias]}"
+          elsif data
+            "#{data[:transitions].count} "
+          end
+        end.join ' | '
+
+        "| [#{timezone_name}](versions/#{timezone_name}.json) | #{row} |\n"
+      end
     end
   end
 end

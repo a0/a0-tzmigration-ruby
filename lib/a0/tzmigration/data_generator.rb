@@ -7,7 +7,7 @@ require 'a0/tzmigration/data_generator/save'
 module A0
   module TZMigration
     class DataGenerator
-      attr_reader :path, :out, :url, :versions
+      attr_reader :path, :out, :url, :versions, :timezones
 
       def initialize(out, url: 'https://github.com/tzinfo/tzinfo-data.git')
         @out = out
