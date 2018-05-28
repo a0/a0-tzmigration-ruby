@@ -52,7 +52,6 @@ RSpec.describe A0::TZMigration do
     expect(first[:utc_ini]).to eq(Time.parse('2016-05-01T02:30:00-04:30'))
   end
 
-
   def compare_inverse(zone_a, version_a, zone_b, version_b)
     a = A0::TZMigration::TZVersion.new(zone_a, version_a)
     b = A0::TZMigration::TZVersion.new(zone_b, version_b)
