@@ -52,9 +52,10 @@ RSpec.describe A0::TZMigration do
     expect(first[:utc_ini]).to eq(Time.parse('2016-05-01T02:30:00-04:30'))
   end
 
-  it 'returns the inverse delta range list for America/Santiago between 2013c 2018e versions' do
-    a = A0::TZMigration::TZVersion.new('America/Santiago', '2013c')
-    b = A0::TZMigration::TZVersion.new('America/Santiago', '2015a')
+
+  def compare_inverse(zone_a, version_a, zone_b, version_b)
+    a = A0::TZMigration::TZVersion.new(zone_a, version_a)
+    b = A0::TZMigration::TZVersion.new(zone_b, version_b)
     dab = a.delta_range_list(b)
     dba = b.delta_range_list(a)
 
@@ -69,6 +70,13 @@ RSpec.describe A0::TZMigration do
       expect(item_a[:off]).to eq(-item_b[:off])
       expect(item_a[:utc_ini]).to eq(item_b[:utc_ini])
       expect(item_a[:utc_fin]).to eq(item_b[:utc_fin])
+    end
+  end
+
+  versions = %w[2013c 2015a 2016a 2018e]
+  versions.product(versions).each do |version_a, version_b|
+    it "returns the inverse delta range list for America/Santiago between #{version_a} #{version_b} versions" do
+      compare_inverse('America/Santiago', version_a, 'America/Santiago', version_b)
     end
   end
 end

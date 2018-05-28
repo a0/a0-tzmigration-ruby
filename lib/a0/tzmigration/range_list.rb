@@ -21,7 +21,7 @@ module A0
     end
 
     def self.next_index(index, range_list, timestamp)
-      index += 1 while (index + 1) < range_list.count && range_list[index][:ini] < timestamp && range_list[index][:fin] <= timestamp
+      index += 1 while range_list[index + 1] && range_list[index][:ini] < timestamp && range_list[index][:fin] <= timestamp
 
       index
     end
@@ -46,13 +46,8 @@ module A0
         range = range_list[index]
 
         if timestamp > range[:ini] && timestamp < range[:fin] && index < range_list.count
-          if index + 1 == range_list.count
-            range_list.insert index + 1, range.merge(ini: timestamp)
-            range_list[index][:fin] = timestamp
-          else
-            range_list.insert index + 1, range.merge(fin: timestamp)
-            range_list[index + 1][:ini] = timestamp
-          end
+          range_list.insert index + 1, range.merge(ini: timestamp)
+          range_list[index][:fin] = timestamp
         end
 
         next_timestamp = timestamps[timestamp_index + 1]
