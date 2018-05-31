@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'a0/tzmigration'
+require 'a0-tzmigration-ruby'
 require 'a0/reload'
 
 # You can add fixtures and/or initialization code here to make experimenting

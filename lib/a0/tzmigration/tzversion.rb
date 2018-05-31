@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rest-client'
+
 module A0
   module TZMigration
     class TZVersion
@@ -8,17 +10,36 @@ module A0
       def initialize(name, version)
         @name = name
         @version = version
-        @path = File.expand_path File.join(__dir__, '..', '..', '..', 'data', 'timezones', "#{name}.json")
-
-        raise "Timezone #{name} was not found at #{@path}" unless File.exist? @path
 
         transitions
+      end
+
+      def self.load_from_network(path)
+        url = "#{A0::TZMigration.config.base_url}/#{path}"
+
+        JSON.parse RestClient.get(url)
+      end
+
+      def self.load_from_file(path)
+        conf = A0::TZMigration.config.data_dir
+        file = File.join(conf, path)
+
+        raise "File #{path} not found at #{conf}" unless File.exist? file
+
+        JSON.parse File.read(file)
+      end
+
+      def self.load_from_network_or_file(path)
+        load_from_network(path)
+      rescue StandardError => error
+        warn "Unable to fetch from network, using local files (error was: #{error})"
+        load_from_file(path)
       end
 
       def data
         return @data if defined? @data
 
-        @data = JSON.parse(File.read(@path))
+        @data = TZVersion.load_from_network_or_file("timezones/#{name}.json")
       end
 
       def released_at
@@ -98,6 +119,14 @@ module A0
         end
 
         A0::TZMigration.timestamp_range_list!(A0::TZMigration.compact_range_list!(delta))
+      end
+
+      def self.versions
+        @versions = load_from_network_or_file('versions/00-index.json')
+      end
+
+      def self.timezones
+        @timezones = load_from_network_or_file('timezones/00-index.json')
       end
     end
   end

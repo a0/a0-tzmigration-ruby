@@ -5,6 +5,22 @@ RSpec.describe A0::TZMigration do
     expect(A0::TZMigration::VERSION).not_to be nil
   end
 
+  it 'can be configured wrong' do
+    A0::TZMigration.configure do |config|
+      config.base_url = 'http://foo'
+    end
+    expect do
+      A0::TZMigration::TZVersion.load_from_network('timezones/America/Santiagors.json')
+    end.to raise_error(StandardError)
+    A0::TZMigration.configure do |config|
+      config.base_url = 'https://a0.github.io/a0-tzmigration-ruby/data/'
+    end
+    expect do
+      A0::TZMigration::TZVersion.load_from_network('timezones/America/Santiagors.json')
+    end.to raise_error(StandardError)
+    A0::TZMigration::TZVersion.load_from_network('timezones/America/Santiago.json')
+  end
+
   it 'can run the data generator' do
     A0::TZMigration::DataGenerator.new('data').generate
   end
@@ -52,7 +68,7 @@ RSpec.describe A0::TZMigration do
     expect(first[:utc_ini]).to eq(Time.parse('2016-05-01T02:30:00-04:30'))
   end
 
-  def compare_inverse(zone_a, version_a, zone_b, version_b)
+  def compare_inverse(zone_a, version_a, zone_b, version_b) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     a = A0::TZMigration::TZVersion.new(zone_a, version_a)
     b = A0::TZMigration::TZVersion.new(zone_b, version_b)
     dab = a.delta_range_list(b)
