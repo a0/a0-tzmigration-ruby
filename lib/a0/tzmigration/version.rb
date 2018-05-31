@@ -2,6 +2,6 @@
 
 module A0
   module TZMigration
-    VERSION = '0.1.0'
+    VERSION = '0.1.1'
   end
 end
