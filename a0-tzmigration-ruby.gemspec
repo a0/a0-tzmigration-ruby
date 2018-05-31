@@ -5,10 +5,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'a0/tzmigration/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'a0-tzmigration'
+  spec.name          = 'a0-tzmigration-ruby'
   spec.version       = A0::TZMigration::VERSION
   spec.authors       = ['Aldrin Martoq']
-  spec.email         = ['a@a0.cl']
+  spec.email         = ['contacto@a0.cl']
 
   spec.summary       = 'Time zone migration utilities, for ruby'
   spec.description   = 'A gem that helps migration between timezone changes when they happen in the tzdata/zoneinfo/Olson database.'
