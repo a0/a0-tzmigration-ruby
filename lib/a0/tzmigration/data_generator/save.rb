@@ -82,7 +82,7 @@ module A0
           end
         end.join ' | '
 
-        "| [#{timezone_name}](versions/#{timezone_name}.json) | #{row} |\n"
+        "| [#{timezone_name}](timezones/#{timezone_name}.json) | #{row} |\n"
       end
     end
   end
