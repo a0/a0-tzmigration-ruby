@@ -41,7 +41,7 @@ module A0
       end
 
       def self.range_item(ini, fin, off)
-        { ini: ini, fin: fin, off: off, ini_str: timestamp_to_str(ini), fin_str: timestamp_to_str(fin), off_str: offset_to_str(off) }
+        { ini_str: timestamp_to_str(ini), fin_str: timestamp_to_str(fin), off_str: offset_to_str(off), ini: ini, fin: fin, off: off }
       end
 
       def self.next_index(index, range_list, timestamp)
