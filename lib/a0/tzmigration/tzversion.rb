@@ -3,14 +3,6 @@
 module A0
   module TZMigration
     class TZVersion
-      def self.versions
-        @versions = Util.load_from_network_or_file('versions/00-index.json')['versions']
-      end
-
-      def self.timezones
-        @timezones = Util.load_from_network_or_file('timezones/00-index.json')['timezones']
-      end
-
       attr_reader :name, :version
 
       def initialize(name, version)
@@ -102,6 +94,14 @@ module A0
         end
 
         Util.compact_range_list!(changes)
+      end
+
+      def self.versions
+        @versions = Util.load_from_network_or_file('versions/00-index.json')['versions']
+      end
+
+      def self.timezones
+        @timezones = Util.load_from_network_or_file('timezones/00-index.json')['timezones']
       end
     end
   end
