@@ -8,7 +8,7 @@ end
 
 RSpec.describe A0::TZMigration do
   it 'can run the data generator' do
-    # A0::TZMigration::DataGenerator.new('data').generate
+    A0::TZMigration::DataGenerator.new('data').generate
   end
 
   it 'has a version number' do
@@ -106,16 +106,16 @@ RSpec.describe A0::TZMigration do
   end
 
   def compare_inverse(zone_a, version_a, zone_b, version_b) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    a = A0::TZMigration::TZVersion.new(zone_a, version_a)
-    b = A0::TZMigration::TZVersion.new(zone_b, version_b)
-    dab = a.changes(b)
-    dba = b.changes(a)
+    tzversion_a = A0::TZMigration::TZVersion.new(zone_a, version_a)
+    tzversion_b = A0::TZMigration::TZVersion.new(zone_b, version_b)
+    changes_ab = tzversion_a.changes(tzversion_b)
+    changes_ba = tzversion_b.changes(tzversion_a)
 
-    expect(dab.count).to eq(dba.count)
+    expect(changes_ab.length).to eq(changes_ba.length)
 
-    dab.each_with_index do |_item, index|
-      item_a = dab[index]
-      item_b = dba[index]
+    changes_ab.each_with_index do |_item, index|
+      item_a = changes_ab[index]
+      item_b = changes_ba[index]
 
       expect_eq_not_nil(item_a[:ini], item_b[:ini])
       expect_eq_not_nil(item_a[:fin], item_b[:fin])

@@ -5,7 +5,7 @@ require 'rest-client'
 module A0
   module TZMigration
     module Util
-      def self.compact_range_list!(range_list) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def self.compact_ranges!(range_list) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         index = 0
 
         while index < range_list.count
@@ -50,7 +50,7 @@ module A0
         index
       end
 
-      def self.split_range_list(range_list, timestamps) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def self.split_ranges(range_list, timestamps) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         range_list = Marshal.load(Marshal.dump(range_list))
         index = 0
 

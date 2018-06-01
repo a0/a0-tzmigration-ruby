@@ -38,13 +38,9 @@ module A0
       def transitions
         return @transitions if defined? @transitions
 
-        if version_data['alias']
-          @transitions = TZVersion.new(version_data['alias'], @version).transitions
-        else
-          @transitions = version_data['transitions']
-          @transitions.each do |transition|
-            transition['utc_time'] = Time.parse(transition['utc_time'])
-          end
+        @transitions = version_data['transitions']
+        @transitions.each do |transition|
+          transition['utc_time'] = Time.parse(transition['utc_time'])
         end
 
         @transitions
@@ -80,10 +76,10 @@ module A0
       end
 
       def changes(other) # rubocop:disable Metrics/AbcSize
-        timestamp_list = (timestamps + other.timestamps).uniq.sort
+        timestamp_list = (timestamps + other.timestamps).sort.uniq
 
-        list_a = Util.split_range_list(transition_ranges, timestamp_list)
-        list_b = Util.split_range_list(other.transition_ranges, timestamp_list)
+        list_a = Util.split_ranges(transition_ranges, timestamp_list)
+        list_b = Util.split_ranges(other.transition_ranges, timestamp_list)
 
         changes = []
         list_a.each_with_index do |range_a, index|
@@ -92,7 +88,7 @@ module A0
           changes << Util.range_item(range_a[:ini], range_a[:fin], range_b[:off] - range_a[:off]) if range_a[:off] != range_b[:off]
         end
 
-        Util.compact_range_list!(changes)
+        Util.compact_ranges!(changes)
       end
 
       def self.versions
