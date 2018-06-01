@@ -63,9 +63,9 @@ RSpec.describe A0::TZMigration do
     expect(changes).to eq([])
   end
 
-  it 'returns non empty changes for America/Santiago from version 2014i to 2015a' do
-    tzversion_a = A0::TZMigration::TZVersion.new('America/Santiago', '2014i')
-    tzversion_b = A0::TZMigration::TZVersion.new('America/Santiago', '2015a')
+  it 'returns non empty changes for America/Santiago version 2016j to America/Punta_Arenas 2017a' do
+    tzversion_a = A0::TZMigration::TZVersion.new('America/Santiago', '2016j')
+    tzversion_b = A0::TZMigration::TZVersion.new('America/Punta_Arenas', '2017a')
     changes = tzversion_a.changes(tzversion_b)
     expect(changes.length).not_to eq(0)
   end

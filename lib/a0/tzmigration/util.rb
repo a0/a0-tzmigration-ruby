@@ -14,6 +14,7 @@ module A0
 
           if next_range && curr_range[:fin] == next_range[:ini] && curr_range[:off] == next_range[:off]
             curr_range[:fin] = next_range[:fin]
+            curr_range[:fin_str] = next_range[:fin_str]
             range_list.delete_at(index + 1)
           else
             index += 1
