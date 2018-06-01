@@ -1,8 +1,7 @@
 # A0::TZMigration
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/a0/tzmigration`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem provides utilities to help with migrations between timezone changes. Please check the official webpage for documentation:
+[https://a0.github.io/a0-tzmigration/](https://a0.github.io/a0-tzmigration/)
 
 ## Installation
 
@@ -20,9 +19,29 @@ Or install it yourself as:
 
     $ gem install a0-tzmigration
 
-## Usage
+## Sample Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'a0-tzmigration-ruby'
+
+version_a = A0::TZMigration::TZVersion.new('America/Santiago', '2015a')
+version_b = A0::TZMigration::TZVersion.new('America/Santiago', '2015c')
+
+version_a.changes(version_b)
+# =>
+[{:ini_str=>"1910-01-01 04:42:46 UTC", :fin_str=>"1910-01-10 04:42:46 UTC", :off_str=>"+00:17:14", :ini=>-1893439034, :fin=>-1892661434, :off=>1034},
+ {:ini_str=>"1918-09-01 04:42:46 UTC", :fin_str=>"1918-09-10 04:42:46 UTC", :off_str=>"-00:42:46", :ini=>-1619983034, :fin=>-1619205434, :off=>-2566},
+ {:ini_str=>"1946-07-15 04:00:00 UTC", :fin_str=>"1946-09-01 03:00:00 UTC", :off_str=>"+01:00:00", :ini=>-740520000, :fin=>-718056000, :off=>3600},
+ {:ini_str=>"1947-05-22 04:00:00 UTC", :fin_str=>"1947-05-22 05:00:00 UTC", :off_str=>"+01:00:00", :ini=>-713649600, :fin=>-713646000, :off=>3600},
+ {:ini_str=>"1988-10-02 04:00:00 UTC", :fin_str=>"1988-10-09 04:00:00 UTC", :off_str=>"-01:00:00", :ini=>591768000, :fin=>592372800, :off=>-3600},
+ {:ini_str=>"1990-03-11 03:00:00 UTC", :fin_str=>"1990-03-18 03:00:00 UTC", :off_str=>"-01:00:00", :ini=>637124400, :fin=>637729200, :off=>-3600}]
+
+# get current known versions in the repository
+A0::TZMigration::TZVersion.versions
+
+# get current known transitions in the repository
+A0::TZMigration::TZVersion.transitions
+```
 
 ## Development
 
