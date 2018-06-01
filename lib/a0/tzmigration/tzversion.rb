@@ -39,11 +39,6 @@ module A0
         return @transitions if defined? @transitions
 
         @transitions = version_data['transitions']
-        @transitions.each do |transition|
-          transition['utc_time'] = Time.parse(transition['utc_time'])
-        end
-
-        @transitions
       end
 
       def transition_ranges # rubocop:disable Metrics/AbcSize
