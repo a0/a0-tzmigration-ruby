@@ -85,6 +85,26 @@ RSpec.describe A0::TZMigration do
     expect(first[:off_str]).to eq('+00:30:00')
   end
 
+  it 'returns the expected changes for versions with empty transitions like UTC' do
+    tzversion_a = A0::TZMigration::TZVersion.new('UTC', '2013c')
+    tzversion_b = A0::TZMigration::TZVersion.new('UTC', '2018e')
+    changes = tzversion_a.changes(tzversion_b)
+    expect(changes).to eq([])
+  end
+
+  it 'returns the expected changes between a version with empty transitions to an non empty one' do
+    tzversion_a = A0::TZMigration::TZVersion.new('Africa/Abidjan', '2018e')
+    tzversion_b = A0::TZMigration::TZVersion.new('UTC', '2018e')
+
+    changes = tzversion_a.changes(tzversion_b)
+    expected = [{ ini: -Float::INFINITY, fin: -1_830_383_032, off: 968, ini_str: '-∞', fin_str: '1912-01-01 00:16:08 UTC', off_str: '+00:16:08' }]
+    expect(changes).to eq(expected)
+
+    changes = tzversion_b.changes(tzversion_a)
+    expected = [{ ini: -Float::INFINITY, fin: -1_830_383_032, off: -968, ini_str: '-∞', fin_str: '1912-01-01 00:16:08 UTC', off_str: '-00:16:08' }]
+    expect(changes).to eq(expected)
+  end
+
   def compare_inverse(zone_a, version_a, zone_b, version_b) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     a = A0::TZMigration::TZVersion.new(zone_a, version_a)
     b = A0::TZMigration::TZVersion.new(zone_b, version_b)
@@ -107,7 +127,7 @@ RSpec.describe A0::TZMigration do
 
   versions = %w[2013c 2015a 2016a 2018e]
   versions.product(versions).each do |version_a, version_b|
-    it "returns the inverse changes America/Santiago from version #{version_a} to #{version_b}" do
+    it "returns the inverse changes for America/Santiago between version #{version_a} and #{version_b}" do
       compare_inverse('America/Santiago', version_a, 'America/Santiago', version_b)
     end
   end

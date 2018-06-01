@@ -58,7 +58,7 @@ module A0
           index = next_index(index, range_list, timestamp)
           range = range_list[index]
 
-          if timestamp > range[:ini] && timestamp < range[:fin] && index < range_list.count
+          if index < range_list.count && timestamp > range[:ini] && timestamp < range[:fin]
             range_list.insert index + 1, range.merge(ini: timestamp)
             range_list[index][:fin] = timestamp
           end

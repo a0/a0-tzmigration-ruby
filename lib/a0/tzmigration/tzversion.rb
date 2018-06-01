@@ -56,11 +56,13 @@ module A0
         ini = -Float::INFINITY
         fin = +Float::INFINITY
 
+        return @transition_ranges = [Util.range_item(ini, fin, 0)] if transitions.empty?
+
         @transition_ranges = transitions.map do |transition|
           Util.range_item(ini, (ini = transition['utc_timestamp']), transition['utc_prev_offset'])
         end
 
-        @transition_ranges << Util.range_item(@transition_ranges.last[:fin], fin, transitions.last['utc_offset']) unless @transition_ranges.empty?
+        @transition_ranges << Util.range_item(@transition_ranges.last[:fin], fin, transitions.last['utc_offset'])
 
         @transition_ranges
       end
@@ -78,9 +80,6 @@ module A0
       end
 
       def changes(other) # rubocop:disable Metrics/AbcSize
-        # raise "No transitions for self #{@name}/#{@version}" if transitions.empty?
-        # raise "No transitions for other #{name}/#{version}" if other.transitions.empty?
-
         timestamp_list = (timestamps + other.timestamps).uniq.sort
 
         list_a = Util.split_range_list(transition_ranges, timestamp_list)
