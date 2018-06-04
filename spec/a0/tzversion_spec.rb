@@ -130,14 +130,14 @@ RSpec.describe A0::TZMigration::TZVersion do
     expect do
       tz_version = A0::TZMigration::TZVersion.new('America/Santiagors', '2018e')
       tz_version.version_data
-    end.to raise_error(RuntimeError)
+    end.to raise_error(StandardError)
     A0::TZMigration.configure do |config|
       config.base_url = 'https://a0.github.io/a0-tzmigration-ruby/data/'
     end
     expect do
       tz_version = A0::TZMigration::TZVersion.new('America/Santiagors', '2018e')
       tz_version.version_data
-    end.to raise_error(RuntimeError)
+    end.to raise_error(StandardError)
     tz_version = A0::TZMigration::TZVersion.new('America/Santiago', '2018e')
     tz_version.version_data
   end

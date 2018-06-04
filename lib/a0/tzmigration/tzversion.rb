@@ -13,7 +13,7 @@ module A0
       def data
         return @data if defined? @data
 
-        @data = Util.load_from_network_or_file("timezones/#{name}.json")
+        @data = Util.load_from_network("timezones/#{name}.json")
       end
 
       def version_data
@@ -87,11 +87,11 @@ module A0
       end
 
       def self.versions
-        @versions = Util.load_from_network_or_file('versions/00-index.json')['versions']
+        @versions = Util.load_from_network('versions/00-index.json')['versions']
       end
 
       def self.timezones
-        @timezones = Util.load_from_network_or_file('timezones/00-index.json')['timezones']
+        @timezones = Util.load_from_network('timezones/00-index.json')['timezones']
       end
     end
   end
