@@ -45,27 +45,14 @@ A0::TZMigration::TZVersion.versions
 # =>
   { "2013c" =>
     { "released_at" => "2013-04-19 16:17:40 -0700",
-      "timezones" => [
-        "Africa/Abidjan",
-        "Africa/Accra",
-        "Africa/Addis_Ababa",
-        "Africa/Algiers",
-        "Africa/Asmara",
-        …
+      "timezones" => [ "Africa/Abidjan", "Africa/Accra", "Africa/Addis_Ababa", "Africa/Algiers", "Africa/Asmara", …
 
 
 # get current known timezones in the repository
 A0::TZMigration::TZVersion.timezones
 # =>
   { "Africa/Abidjan" =>
-    { "versions" => [
-        "2013c",
-        "2013d",
-        "2013e",
-        "2013f",
-        "2013g",
-        …
-
+    { "versions" => [ "2013c", "2013d", "2013e", "2013f", "2013g", …
 ```
 
 ## Development
