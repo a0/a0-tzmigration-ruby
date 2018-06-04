@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    a0-tzmigration-ruby (1.0.1)
+    a0-tzmigration-ruby (1.0.2)
       rest-client
 
 GEM
