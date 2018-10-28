@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'time'
+require 'fasten'
 require 'parallel'
-require 'etc'
 
 module A0
   module TZMigration
@@ -22,9 +22,8 @@ module A0
 
       def generate_versions
         tags = repo.tags.map(&:name)
-        n_proc = Etc.nprocessors || 2
 
-        @versions = Parallel.map(tags, in_processes: n_proc, progress: 'Processing') do |tag|
+        @versions = Fasten.map(tags, name: 'a0-tzmigration-ruby-data') do |tag|
           process_tag tag
         end
 

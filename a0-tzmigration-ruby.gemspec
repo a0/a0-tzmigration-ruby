@@ -30,8 +30,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop'
 
+  spec.add_development_dependency 'fasten'
   spec.add_development_dependency 'git'
-  spec.add_development_dependency 'parallel'
   spec.add_development_dependency 'ruby-progressbar'
   spec.add_development_dependency 'tzinfo'
 
@@ -40,5 +40,6 @@ Gem::Specification.new do |spec|
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless spec.respond_to?(:metadata)
+
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 end
