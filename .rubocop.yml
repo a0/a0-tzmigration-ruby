@@ -11,3 +11,8 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+  ExcludedMethods:
+    - Gem::Specification.new
+Naming/FileName:
+  Exclude:
+    - lib/a0-tzmigration-ruby.rb
