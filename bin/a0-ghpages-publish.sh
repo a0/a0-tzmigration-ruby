@@ -18,4 +18,4 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f https://github.com/a0/a0-tzmigration-ruby.git master:gh-pages
+git push -f git@github.com:a0/a0-tzmigration-ruby.git master:gh-pages

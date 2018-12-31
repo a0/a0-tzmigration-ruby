@@ -55,6 +55,7 @@ module A0
 
       def save_index
         File.open(File.join(@out, 'index.md'), 'w') do |file|
+          file.write "Generated at #{Time.now.utc}\n\n"
           file.write version_head
           @timezones.keys.sort.map do |timezone_name|
             file.write timezones_row(timezone_name)

@@ -8,6 +8,8 @@
 /tmp/
 /data/repo
 /dist
+/curr.txt
+/last.txt
 
 # rspec failure tracking
 .rspec_status
