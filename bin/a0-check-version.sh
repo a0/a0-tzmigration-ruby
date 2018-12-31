@@ -17,4 +17,4 @@ git pull
 git describe > $CURR_VERSION
 
 cd $BASE
-diff $LAST_VERSION $CURR_VERSION && echo "Nothing changed" || (echo "Auto updating" && rake generate-data && bin/a0-ghpages-publish.sh && cp $CURR_VERSION $LAST_VERSION && echo "updated to $(cat $CURR_VERSION)" | mail -s hola a@a0.cl)
+diff $LAST_VERSION $CURR_VERSION && echo "Nothing changed" || (echo "Auto updating" && rake generate-data && bin/a0-ghpages-publish.sh && cp $CURR_VERSION $LAST_VERSION && echo "updated to $(cat $CURR_VERSION)" | mail -s hola github@a0.cl)
