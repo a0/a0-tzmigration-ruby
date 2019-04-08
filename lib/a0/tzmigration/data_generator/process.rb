@@ -59,6 +59,7 @@ module A0
           release, time = line.split(' - ')
           version = release.split.last
           next unless time
+          version = '2019a' if version == '20198' # workaround for 2019a
 
           @released_at[version] = Time.parse(time)
         end
