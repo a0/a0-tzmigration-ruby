@@ -42,10 +42,18 @@ module A0
         @timezones = @timezones.to_a.sort_by(&:first).to_h
       end
 
+      def find_news_file
+        if File.exist?(File.join(@path, 'data', 'NEWS'))
+          File.join(@path, 'data', 'NEWS')
+        else
+          %x[cd #{@path} && rake tzdb:extract:data]
+          Dir.glob(File.join(@path, 'tzdb', '*', 'data', 'NEWS')).first
+        end
+      end
+
       def load_release_dates
         @released_at = {}
-
-        File.open(File.join(@path, 'data', 'NEWS')).each_line do |line|
+        File.open(find_news_file).each_line do |line|
           next unless line.start_with? 'Release '
 
           release, time = line.split(' - ')
