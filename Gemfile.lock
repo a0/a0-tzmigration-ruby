@@ -7,6 +7,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
@@ -21,7 +23,9 @@ GEM
       curses
       hirb
       parallel
-    git (1.5.0)
+    git (1.13.0)
+      addressable (~> 2.8)
+      rchardet (~> 1.8)
     hirb (0.7.3)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -38,8 +42,10 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    public_suffix (5.0.1)
     rainbow (3.0.0)
     rake (13.0.1)
+    rchardet (1.8.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
